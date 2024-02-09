@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            background-image: url("paper.gif");
+            background-color: rgb(230, 197, 197);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            border-style: double;
+            text-align: center;
+            margin: 50px;
+            padding: 20px;
+            background-color: rgb(224, 123, 123);
+            color: beige;
+            font-size: larger;
+        }
+
+        /* h1 {
+            border-style: double;
+            border-color: black;
+        } */
+
+        .btn {
+            size: 40px;
+            border: none;
+            color: rgb(73, 10, 10);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Random Quote Generator</h1>
+        <hr>
+        <h4 id="text2">Click below button to generate a quote</h4><br>
+        <button class="btn" onclick="generateQuote()">Generate</button><br><br>
+        <p id="quoteText"></p>
+    </div>
+
+    <script>
+        function generateQuote() {
+            const para = document.getElementById('quoteText');
+
+            fetch('https://type.fit/api/quotes')
+                .then(response => response.json())
+                .then(data => {
+                    const randomNumber = Math.floor(Math.random() * data.length);
+                    para.innerText = data[randomNumber].text;
+                });
+        }
+    </script>
+</body>
+
+</html>
